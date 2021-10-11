@@ -57,10 +57,14 @@ export const MainPage = () => {
 			return;
 		}
 		else{
-			const min = Math.ceil(leftNum);
-			const max = Math.floor(rightNum);
-			const randomRes = Math.floor(Math.random() * (max-min) + min);
-			setRandomResult(randomRes);
+			setGenerating(true);
+			setTimeout(() => {
+				const min = Math.ceil(leftNum);
+				const max = Math.floor(rightNum);
+				const randomRes = Math.floor(Math.random() * (max-min) + min);
+				setRandomResult(randomRes);
+				setGenerating(false);
+			},4000);
 		}
 
 	}
@@ -70,7 +74,7 @@ export const MainPage = () => {
 		return(
 
 			<Spinner animation="border" as="span" size="sm" role="status" aria-hidden="true">
-				Generating Random Number
+				Generating
 			</Spinner>
 
 		);
@@ -97,7 +101,7 @@ export const MainPage = () => {
 				<br />
 				<Row>
 					<Col style={{textAlign: 'center' }}>
-						<Button onClick={genFunction}>Generate Random Number</Button>
+						{generating? genSpinner(): <Button onClick={genFunction}>Generate Random Number</Button>}
 					</Col>
 				</Row>
 				<Row>
